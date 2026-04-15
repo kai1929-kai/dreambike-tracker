@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Available</title>
+
+<style>
+body {
+    text-align: center;
+    font-family: Arial;
+    background: #F9CF00;
+    margin: 0;
+}
+
+.logo {
+    width: 180px;
+    margin-top: 40px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 16px;
+    padding: 0 20px;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    background: gray;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<img src="{{ url_for('static', filename='logo.jfif') }}" class="logo">
+
+<div class="title">{{ title }} 🎉</div>
+
+<div class="message">
+Congratulations! Your record is available at our office.<br>
+Please message us on how to claim it.
+</div>
+
+<a href="https://www.facebook.com/profile.php?id=61560025200629" target="_blank">
+<button class="btn">SEND MESSAGE</button>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const duration = 3 * 1000;
+const end = Date.now() + duration;
+
+(function frame() {
+    confetti({
+        particleCount: 6,
+        spread: 80,
+        origin: { y: 0.6 }
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
+    }
+})();
+</script>
+
+</body>
+</html>

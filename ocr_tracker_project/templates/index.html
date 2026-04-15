@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dreambike PH</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFCC00; /* exact color */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+}
+
+/* LEFT SIDE */
+.left {
+    width: 50%;
+}
+
+.title {
+    font-size: 80px;
+    font-weight: 900;
+    color: black;
+    line-height: 1.1;
+}
+
+.subtitle {
+    margin-top: 30px;
+    font-size: 35px;
+}
+
+.buttons {
+    margin-top: 80px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 70px;
+    margin-right: 20px;
+    background: black;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* RIGHT SIDE */
+.right {
+    width: 40%;
+    text-align: center;
+}
+
+.logo {
+    width: 380px; /* bigger logo */
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 100px;
+    padding-bottom: 60px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+        <div class="title">
+            ANOTHER DAY,<br>
+            ANOTHER BIKE!
+        </div>
+
+        <div class="subtitle">
+            Selling in Style:<br>
+            Choose your Dreambike with us!
+            <br><br>
+            Monday to Sunday<br>
+            9:00AM to 6:00PM
+        </div>
+
+        <div class="buttons">
+            <!-- FACEBOOK LINK -->
+            <a href="https://www.facebook.com/profile.php?id=61560025200629" target="_blank" class="btn">
+                Message Us!
+            </a>
+
+            <!-- TRACKER PAGE -->
+            <a href="/tracker" class="btn">
+                PLATE/ORCR TRACKER
+            </a>
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+        <!-- ONLY IMAGE (no extra text) -->
+        <img src="{{ url_for('static', filename='logo.jfif') }}" class="logo">
+    </div>
+
+</div>
+
+<div class="footer">
+    At DREAM BIKE PH, "We make your dream bikes come true."
+</div>
+
+</body>
+</html>

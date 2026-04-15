@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreambike Tracker</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #F9CF00;
+    text-align: center;
+    margin: 0;
+}
+
+.container {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.logo {
+    width: 180px;
+}
+
+.info {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 25px;
+    letter-spacing: 2px;
+}
+
+input {
+    width: 90%;
+    max-width: 320px;
+    padding: 12px;
+    border: 2px solid black;
+    text-align: center;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: orange;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="{{ url_for('static', filename='logo.jfif') }}" class="logo">
+
+<div class="info">
+    You can search using <b>Plate Number</b> OR <b>4-digit Engine (ORCR)</b>
+</div>
+
+<form method="POST">
+
+<h2>PLATE TRACKER</h2>
+<input type="text" name="plate" placeholder="INSERT PLATE NUMBER">
+
+<h2>ORCR TRACKER</h2>
+<input type="text" name="engine" placeholder="INSERT 4 DIGIT ENGINE NUMBER">
+
+<br>
+<button type="submit">SEARCH</button>
+
+</form>
+
+<div class="result">
+{% if message == "Not Available" %}
+<p style="color: red;">Not Available</p>
+{% endif %}
+</div>
+
+</div>
+
+</body>
+</html>
