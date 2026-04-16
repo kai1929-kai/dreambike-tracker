@@ -16,7 +16,6 @@ def load_data():
     return df
 
 
-# 🔥 MAIN PAGE
 @app.route('/', methods=['GET', 'POST'])
 def tracker():
     message = None
@@ -26,25 +25,34 @@ def tracker():
         engine_input = request.form.get('engine')
 
         df = load_data()
+
+        # 🔥 FIX EMPTY CELLS
+        df = df.fillna('')
+
+        # 🔥 CLEAN COLUMN NAMES
         df.columns = df.columns.str.strip().str.lower()
 
-        # ensure columns exist
+        # 🔥 CHECK REQUIRED COLUMNS
         if 'engine' not in df.columns or 'plate' not in df.columns:
             return render_template('tracker.html', message="Column missing")
 
-        # clean data
-        df['engine'] = df['engine'].astype(str).str.strip()
+        # 🔥 CLEAN DATA (CRITICAL FIX FOR RENDER)
+        df['engine'] = df['engine'].astype(str).str.replace('.0','', regex=False).str.strip()
         df['plate'] = df['plate'].astype(str).str.strip().str.upper()
+
+        if 'sinski' in df.columns:
+            df['sinski'] = df['sinski'].astype(str).str.replace('.0','', regex=False).str.strip()
 
         # 🔥 ORCR SEARCH
         if engine_input:
             engine_clean = ''.join(filter(str.isdigit, engine_input))[-4:]
 
-            engine_match = df[df['engine'].str.contains(engine_clean, na=False)]
+            # EXACT MATCH
+            engine_match = df[df['engine'] == engine_clean]
 
             sinski_match = pd.DataFrame()
             if 'sinski' in df.columns:
-                sinski_match = df[df['sinski'].astype(str).str.contains(engine_clean, na=False)]
+                sinski_match = df[df['sinski'] == engine_clean]
 
             # 🔥 PRIORITY: SINSKI FIRST
             if not sinski_match.empty:
@@ -60,7 +68,7 @@ def tracker():
         elif plate_input:
             plate_clean = plate_input.strip().upper()
 
-            result = df[df['plate'].str.contains(plate_clean, na=False)]
+            result = df[df['plate'] == plate_clean]
 
             if not result.empty:
                 return redirect('/success?type=plate')
@@ -70,7 +78,6 @@ def tracker():
     return render_template('tracker.html', message=message)
 
 
-# 🔥 SUCCESS PAGE
 @app.route('/success')
 def success():
     search_type = request.args.get('type')
