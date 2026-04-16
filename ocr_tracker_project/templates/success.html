@@ -3,19 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreambike Tracker</title>
+<title>Available</title>
 
 <style>
 body {
+    text-align: center;
     font-family: Arial;
     background: #F9CF00;
-    text-align: center;
     margin: 0;
-}
-
-.container {
-    margin-top: 40px;
-    padding: 20px;
 }
 
 .logo {
@@ -25,81 +20,97 @@ body {
     margin-top: 30px;
 }
 
-.info {
-    margin-top: 15px;
-    font-size: 14px;
+.title {
+    font-size: 28px;
     font-weight: bold;
-}
-
-h2 {
-    margin-top: 25px;
-    letter-spacing: 2px;
-}
-
-input {
-    width: 90%;
-    max-width: 320px;
-    padding: 12px;
-    border: 2px solid black;
-    text-align: center;
-    margin-top: 10px;
-}
-
-button {
     margin-top: 20px;
-    padding: 12px 25px;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 15px 40px;
     background: orange;
     border: none;
-    color: white;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
 }
 
-.result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
+/* 🎉 smooth fade-in */
+.fade {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
-<body>
-
-<div class="container">
+<body class="fade">
 
 <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
-<div class="info">
-    You can search using <b>Plate Number</b> OR <b>4-digit Engine (ORCR)</b>
+<div class="title">{{ title }} 🎉</div>
+
+<div class="message">
+Congratulations! Your record is available.<br>
+Please message us to claim.
 </div>
 
-<form method="POST">
+<a href="https://www.facebook.com/profile.php?id=61560025200629" target="_blank">
+<button class="btn">SEND MESSAGE</button>
+</a>
 
-<h2>PLATE TRACKER</h2>
-<input type="text" name="plate" placeholder="INSERT PLATE NUMBER">
+<br><br>
 
-<h2>ORCR TRACKER</h2>
-<input type="text" name="engine" placeholder="INSERT 4 DIGIT ENGINE NUMBER">
+<a href="/">
+<button class="btn">SEARCH AGAIN</button>
+</a>
 
-<br>
-<button type="submit">SEARCH</button>
+<!-- 🎉 CONFETTI SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-</form>
+<script>
+window.onload = function () {
 
-<!-- 🔥 RESULT -->
-<div class="result">
+    // 🎉 BIG BURST
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+    });
 
-{% if message == "Not Available" %}
-    <p style="color: red;">Not Available</p>
+    // 🎉 SIDE CONFETTI
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
 
-{% elif message %}
-    <p style="color: red;">{{ message }}</p>
+    (function frame() {
+        confetti({
+            particleCount: 6,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+        });
 
-{% endif %}
+        confetti({
+            particleCount: 6,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+        });
 
-</div>
-
-</div>
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+};
+</script>
 
 </body>
 </html>
