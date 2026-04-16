@@ -10,32 +10,24 @@ body {
     font-family: Arial;
     background: #F9CF00;
     text-align: center;
-    margin: 0;
-}
-
-.container {
-    margin-top: 40px;
-    padding: 20px;
 }
 
 .logo {
-    width: 180px;
+    width: 260px;
+    margin-top: 40px;
 }
 
 .info {
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 10px;
     font-weight: bold;
 }
 
 h2 {
     margin-top: 25px;
-    letter-spacing: 2px;
 }
 
 input {
-    width: 90%;
-    max-width: 320px;
+    width: 300px;
     padding: 12px;
     border: 2px solid black;
     text-align: center;
@@ -49,7 +41,6 @@ button {
     border: none;
     color: white;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .result {
@@ -62,12 +53,10 @@ button {
 
 <body>
 
-<div class="container">
-
-<img src="{{ url_for('static', filename='logo.jfif') }}" class="logo">
+<img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
 <div class="info">
-    You can search using <b>Plate Number</b> OR <b>4-digit Engine (ORCR)</b>
+You can search using <b>Plate Number</b> OR <b>4-digit Engine (ORCR)</b>
 </div>
 
 <form method="POST">
@@ -86,9 +75,10 @@ button {
 <div class="result">
 {% if message == "Not Available" %}
 <p style="color: red;">Not Available</p>
-{% endif %}
-</div>
 
+{% elif message == "Transfer of Ownership is still in process." %}
+<p style="color: red;">Transfer of Ownership is still in process.</p>
+{% endif %}
 </div>
 
 </body>
