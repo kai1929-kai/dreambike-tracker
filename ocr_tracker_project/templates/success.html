@@ -10,13 +10,10 @@ body {
     text-align: center;
     font-family: Arial;
     background: #F9CF00;
-    margin: 0;
 }
 
 .logo {
-    width: 400px;
-    max-width: 80%;
-    height: auto;
+    width: 300px;
     margin-top: 30px;
 }
 
@@ -28,7 +25,6 @@ body {
 
 .message {
     margin-top: 15px;
-    font-size: 16px;
 }
 
 .btn {
@@ -37,22 +33,11 @@ body {
     background: orange;
     border: none;
     cursor: pointer;
-    font-weight: bold;
-}
-
-/* 🎉 smooth fade-in */
-.fade {
-    animation: fadeIn 0.6s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
-<body class="fade">
+<body>
 
 <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
 
@@ -73,42 +58,15 @@ Please message us to claim.
 <button class="btn">SEARCH AGAIN</button>
 </a>
 
-<!-- 🎉 CONFETTI SCRIPT -->
+<!-- 🎉 CONFETTI -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script>
 window.onload = function () {
-
-    // 🎉 BIG BURST
     confetti({
         particleCount: 150,
         spread: 100,
         origin: { y: 0.6 }
     });
-
-    // 🎉 SIDE CONFETTI
-    const duration = 3 * 1000;
-    const end = Date.now() + duration;
-
-    (function frame() {
-        confetti({
-            particleCount: 6,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 }
-        });
-
-        confetti({
-            particleCount: 6,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 }
-        });
-
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    })();
 };
 </script>
 
